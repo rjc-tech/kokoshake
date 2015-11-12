@@ -1,0 +1,20 @@
+.textArea {
+    background-color: white;
+    padding: 5px;
+}
+
+.space1 {
+    padding-right: 1em;
+}
+
+.space4 {
+    padding-left: 4em;
+}
+
+.message {
+    color: red;
+}
+
+#btnA {
+    margin-bottom: 20px;
+}

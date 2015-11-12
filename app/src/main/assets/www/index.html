@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <title>GPS Measure</title>
+        <link REL="stylesheet" HREF="css/index.css" TYPE="text/css">
+    </head>
+    <body bgcolor="gray">
+        <div class="textArea">
+            <span>ココShake！</span>
+            <span>Ａ地点：緯度&nbsp;</span><span id="latitudeA"></span><br/>
+            <span class="space4">経度&nbsp;</span><span id="longitudeA"></span><br/>
+            <span>Ｂ地点：緯度&nbsp;</span><span id="latitudeB"></span><br/>
+            <span class="space4">経度&nbsp;</span><span id="longitudeB"></span><br/>
+            <span class="space1">距離</span>：<span id="distance"></span><br/>
+            <span id="message" class="message"></span>
+            <div align="right"><img id="btnR" border="0" src="img/clear_button.png" alt="C"/></div>
+        </div>
+        <br>
+
+        <div align="center">
+            <img id="btnA" border="0" src="img/a_button.png" width="180px;" height="180px;" alt="A地点"/>
+            <img id="btnB" border="0" src="img/b_button.png" width="180px;" height="180px;" alt="B地点"/>
+        </div>
+        <script type="text/javascript" src="js/cordova.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/geolib.js"></script>
+        <script src="js/kokoshake.js"></script>
+    </body>
+</html>
