@@ -30,25 +30,30 @@
         <link REL="stylesheet" HREF="css/index.css" TYPE="text/css">
     </head>
     <body bgcolor="gray">
-        <div class="textArea">
-            <span>ココShake！</span>
-            <span>Ａ地点：緯度&nbsp;</span><span id="latitudeA"></span><br/>
-            <span class="space4">経度&nbsp;</span><span id="longitudeA"></span><br/>
-            <span>Ｂ地点：緯度&nbsp;</span><span id="latitudeB"></span><br/>
-            <span class="space4">経度&nbsp;</span><span id="longitudeB"></span><br/>
-            <span class="space1">距離</span>：<span id="distance"></span><br/>
-            <span id="message" class="message"></span>
-            <div align="right"><img id="btnR" border="0" src="img/clear_button.png" alt="C"/></div>
+        <div id="tutorial_page" class="panel" style="display:none">
+            <div align="center">
+                これは、チュートリアルです。
+                <a href="#shake_page" id="tutorial_end">Finish!</a>
+            </div>
         </div>
-        <br>
-
-        <div align="center">
-            <img id="btnA" border="0" src="img/a_button.png" width="180px;" height="180px;" alt="A地点"/>
-            <img id="btnB" border="0" src="img/b_button.png" width="180px;" height="180px;" alt="B地点"/>
+        <div id="shake_page" class="panel" style="display:none">
+            <div>
+                <a href="#setting_page"><img id="setting" border="0" src="img/setting.png" alt="setting" /></a>
+            </div>
+            <div align="center">
+                <img id="shake_me" border="0" src="img/shake_me.png" width="180px;" height="180px;" alt="Shake Me!" />
+            </div>
         </div>
-        <script type="text/javascript" src="js/cordova.js"></script>
+        <div id="setting_page" class="panel" style="display:none">
+            メーラー：<br>
+            <input type="text" id="mailer" name="mailer" alt="mailer" /><br>
+        </div>
+        <script src="js/cordova.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/geolib.js"></script>
         <script src="js/kokoshake.js"></script>
+        <script src="js/shake.js"></script>
+        <script src="js/contact.js"></script>
+        <script src="js/meil.js"></script>
     </body>
 </html>
