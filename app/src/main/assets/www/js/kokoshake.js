@@ -15,33 +15,26 @@ document.addEventListener('deviceready', function() {
             alert(msgJp.system.canNotUse);
             navigator.app.exitApp();
         }
+
+        // 初回起動時のチュートリアルを表示するかどうか
+        if ("end" != window.localStorage.getItem("tutorial")) {
+            $("#tutorial_page").show();
+        } else {
+            $("#shake_page").show();
+        }
     });
 
     // 前回実行時の値をストレージから設定
+    // TODO メール内容に置き換え
 	var latitudeA = window.localStorage.getItem("latitudeA");
 	if (latitudeA) {
 		$("#latitudeA").text(latitudeA);
 		$("#longitudeA").text(window.localStorage.getItem("longitudeA"));
 	}
 
-	var latitudeB = window.localStorage.getItem("latitudeB");
-	if (latitudeB) {
-		$("#latitudeB").text(latitudeB);
-		$("#longitudeB").text(window.localStorage.getItem("longitudeB"));
-	}
+	var geoOptions = { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true };;
 
-	setDistance();
-
-	var geoOptions = { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true };
-
-	// ボタン押下時のレイアウトチェンジ
-	$("#btnA").bind("touchstart", function() {changeImage("btnA","./img/a_button_onClick.png");});
-	$("#btnA").bind("touchend", function() {changeImage("btnA","./img/a_button.png");});
-	$("#btnB").bind("touchstart", function() {changeImage("btnB","./img/b_button_onClick.png");});
-	$("#btnB").bind("touchend", function() {changeImage("btnB","./img/b_button.png");});
-	$("#btnR").bind("touchstart", function() {changeImage("btnR","./img/clear_button_onClick.png");});
-	$("#btnR").bind("touchend", function() {changeImage("btnR","./img/clear_button.png");});
-
+    // 振るイベントに変更
 	$("#btnA").click(function() {
 		navigator.geolocation.getCurrentPosition(function(position) {
 			window.localStorage.setItem("latitudeA", position.coords.latitude);
@@ -55,47 +48,46 @@ document.addEventListener('deviceready', function() {
 		}, geoOptions);
 	});
 
-	$("#btnB").click(function() {
-		navigator.geolocation.getCurrentPosition(function(position) {
-			window.localStorage.setItem("latitudeB", position.coords.latitude);
-			window.localStorage.setItem("longitudeB", position.coords.longitude);
-			$("#latitudeB").text(position.coords.latitude);
-			$("#longitudeB").text(position.coords.longitude);
-			setDistance();
-		},
-		function(e) {
-			$("#message").text(msgJp.location.unknownB);
-		}, geoOptions);
+	// チュートリアルが終わった時の処理
+	$("#tutorial_end").click(function() {
+	    window.localStorage.setItem("tutorial", "end");
 	});
 
-	$("#btnR").click(function() {
-		$("#latitudeA").text("");
-		$("#longitudeA").text("");
-		$("#latitudeB").text("");
-		$("#longitudeB").text("");
-		$("#distance").text("");
-		$("#message").text("");
-		window.localStorage.clear();
-	});
+    // 画面遷移処理
+    $("a[href^='#']").click(function() {
+        $(".panel").hide();
+        document.location = $(this).attr("href");
+        $($(this).attr("href")).show();
+    });
 
-    // 距離を計算して設定する
-    function setDistance() {
-        if ($("#latitudeA").text() == "" || $("#latitudeB").text() == "") {
-            return;
+    // 戻るボタン処理
+    document.addEventListener("backbutton", function() {
+        var anchorIndex = document.location.href.indexOf("#");
+        if (anchorIndex < 0) {
+            navigator.app.exitApp();
         }
 
-        var positionA = {};
-        var positionB = {};
-        positionA["latitude"] = $("#latitudeA").text();
-        positionA["longitude"] = $("#longitudeA").text();
-        positionB["latitude"] = $("#latitudeB").text();
-        positionB["longitude"] = $("#longitudeB").text();
+        var anchor = document.location.href.substring(anchorIndex);
+        if (anchor == "#shake_page") {
+            navigator.app.exitApp();
+        }
 
-        $("#distance").text(geolib.getDistance(positionA, positionB) + " (m)");
-    }
+        window.history.back();
+        function backBtn() {
+            var prevAnchor = document.location.href.substring(anchorIndex);
+            if (anchor == prevAnchor) {
+                setTimeout(backBtn, 0);
+                return;
+            }
 
-    // 画像差し替え用処理
-    function changeImage( imgid , newimg ) {
-       $("#" + imgid).attr("src", newimg);
-    }
+            $(".panel").hide();
+            if (prevAnchor == "") {
+                $("#shake_page").show();
+            } else {
+                $(document.location.href.substring(anchorIndex)).show();
+            }
+        }
+        setTimeout(backBtn, 0);
+
+    }, false);
 }, false);
