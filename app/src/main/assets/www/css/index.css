@@ -1,8 +1,3 @@
-.textArea {
-    background-color: white;
-    padding: 5px;
-}
-
 .space1 {
     padding-right: 1em;
 }
@@ -15,6 +10,6 @@
     color: red;
 }
 
-#btnA {
+#shake_img {
     margin-bottom: 20px;
 }
