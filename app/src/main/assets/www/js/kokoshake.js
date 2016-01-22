@@ -24,7 +24,6 @@ document.addEventListener('deviceready', function() {
         }
 
         // 設定画面の初期値を設定
-	    $("#mailer").val(window.localStorage.getItem("mailer"));
 	    $("#address").val(window.localStorage.getItem("address"));
 	    $("#subject").val(window.localStorage.getItem("subject"));
         $("#body").val(window.localStorage.getItem("body"));
@@ -43,15 +42,11 @@ document.addEventListener('deviceready', function() {
 
 	// 登録ボタンを押した時の処理
 	$("#register").click(function() {
-	    // TODO エラーチェック
-	    window.localStorage.setItem("mailer", $("#mailer").val());
 	    window.localStorage.setItem("address", $("#address").val());
 	    window.localStorage.setItem("subject", $("#subject").val());
         window.localStorage.setItem("body", $("#body").val());
 
-        $(".panel").hide();
-        document.location = "#shake_page";
-        $("#shake_page").show();
+        $("#register_link").click();
 	});
 
     // 画面遷移処理
