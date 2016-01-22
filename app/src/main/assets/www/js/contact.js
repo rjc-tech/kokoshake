@@ -1,8 +1,5 @@
 document.addEventListener('deviceready', function() {
     // 連絡先機能を実装してください。
-    $(".address").live("click", function(){
-        alert("clickされたよ");
-    });
 }, false);
 
 function doAction(){
@@ -16,10 +13,14 @@ function doAction(){
 function onSuccess(contacts) {
     var res = "<ol>";
     for (var i=0; i < contacts.length; i++) {
-        res += '<li><span class="address">' + contacts[i].displayName + '：' + contacts[i].emails[0]["value"] + '</span></li>';
+        res += '<li class="mail_info">' + contacts[i].displayName + '：[' + '<span class="address">' + contacts[i].emails[0]["value"] + '</span>]</li>';
+        res += '<li class="mail_info">' + contacts[i].displayName + '：[' + '<span class="address">' + 'test1@gmail.com' + '</span>]</li>';
+        res += '<li class="mail_info">' + contacts[i].displayName + '：[' + '<span class="address">' + 'test2@gmail.com' + '</span>]</li>';
     }
-    res += "<ol>";
-    document.getElementById('msg').innerHTML = res;
+    $('#msg').html(res);
+    $(".mail_info").on("click", function(){
+        alert($(this).children(".address").text());
+    });
 }
 
 function onError() {

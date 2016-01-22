@@ -68,7 +68,7 @@ document.addEventListener('deviceready', function() {
         }
 
         var anchor = document.location.href.substring(anchorIndex);
-        if (anchor == "#tutorial_page" || anchor == "#shake_page") {
+        if (anchor == "#shake_page") {
             navigator.app.exitApp();
         }
 
