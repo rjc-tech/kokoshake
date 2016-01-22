@@ -30,30 +30,6 @@ document.addEventListener('deviceready', function() {
         $("#body").val(window.localStorage.getItem("body"));
     });
 
-    // 前回実行時の値をストレージから設定
-    // TODO メール内容に置き換え
-	var latitudeA = window.localStorage.getItem("latitudeA");
-	if (latitudeA) {
-		$("#latitudeA").text(latitudeA);
-		$("#longitudeA").text(window.localStorage.getItem("longitudeA"));
-	}
-
-	var geoOptions = { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true };;
-
-    // 振るイベントに変更
-	$("#btnA").click(function() {
-		navigator.geolocation.getCurrentPosition(function(position) {
-			window.localStorage.setItem("latitudeA", position.coords.latitude);
-			window.localStorage.setItem("longitudeA", position.coords.longitude);
-			$("#latitudeA").text(position.coords.latitude);
-			$("#longitudeA").text(position.coords.longitude);
-			setDistance();
-		},
-		function(e) {
-			$("#message").text(msgJp.location.unknownA);
-		}, geoOptions);
-	});
-
 	// チュートリアルが終わった時の処理
 	$("#tutorial_page").click(function() {
 	    if (window.localStorage.getItem("tutorial") != "end") {
@@ -72,10 +48,14 @@ document.addEventListener('deviceready', function() {
 	    window.localStorage.setItem("address", $("#address").val());
 	    window.localStorage.setItem("subject", $("#subject").val());
         window.localStorage.setItem("body", $("#body").val());
+
+        $(".panel").hide();
+        document.location = "#shake_page";
+        $("#shake_page").show();
 	});
 
     // 画面遷移処理
-    $("a[href^='#']").click(function() {
+    $("body").on("click","a[href^='#']", function() {
         $(".panel").hide();
         document.location = $(this).attr("href");
         $($(this).attr("href")).show();
