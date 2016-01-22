@@ -75,7 +75,7 @@ document.addEventListener('deviceready', function() {
 	});
 
     // 画面遷移処理
-    $("a[href^='#']").click(function() {
+    $("body").on("click","a[href^='#']", function() {
         $(".panel").hide();
         document.location = $(this).attr("href");
         $($(this).attr("href")).show();
