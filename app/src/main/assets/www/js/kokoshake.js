@@ -22,6 +22,12 @@ document.addEventListener('deviceready', function() {
         } else {
             $("#shake_page").show();
         }
+
+        // 設定画面の初期値を設定
+	    $("#mailer").val(window.localStorage.getItem("mailer"));
+	    $("#address").val(window.localStorage.getItem("address"));
+	    $("#subject").val(window.localStorage.getItem("subject"));
+        $("#body").val(window.localStorage.getItem("body"));
     });
 
     // 前回実行時の値をストレージから設定
@@ -49,8 +55,23 @@ document.addEventListener('deviceready', function() {
 	});
 
 	// チュートリアルが終わった時の処理
-	$("#tutorial_end").click(function() {
-	    window.localStorage.setItem("tutorial", "end");
+	$("#tutorial_page").click(function() {
+	    if (window.localStorage.getItem("tutorial") != "end") {
+            window.localStorage.setItem("tutorial", "end");
+            window.localStorage.setItem("subject", "いまここにいます");
+            window.localStorage.setItem("body", "いまここにいます");
+            $("#subject").val(window.localStorage.getItem("subject"));
+            $("#body").val(window.localStorage.getItem("body"));
+	    }
+	});
+
+	// 登録ボタンを押した時の処理
+	$("#register").click(function() {
+	    // TODO エラーチェック
+	    window.localStorage.setItem("mailer", $("#mailer").val());
+	    window.localStorage.setItem("address", $("#address").val());
+	    window.localStorage.setItem("subject", $("#subject").val());
+        window.localStorage.setItem("body", $("#body").val());
 	});
 
     // 画面遷移処理
