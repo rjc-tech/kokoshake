@@ -26,14 +26,21 @@
         <meta name="msapplication-tap-highlight" content="no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <title>GPS Measure</title>
+        <title>KoKo Shake</title>
         <link REL="stylesheet" HREF="css/index.css" TYPE="text/css">
     </head>
     <body>
         <div id="tutorial_page" class="panel" style="display:none">
+            <div align="right">
+                <a href="#setting_page"><img id="setting_tutorial" border="0" src="img/setting.png" alt="setting" /></a>
+                <a href="#tutorial_page"><img id="about_tutorial" border="0" src="img/about.png" alt="about" /></a>
+            </div>
             <div align="center">
-                これは、チュートリアルです。<br>
-                <a href="#shake_page" id="tutorial_end">早速使ってみる >></a>
+                ココshake!は端末を振ることで、あらかじめインストールされたメールアプリに、位置情報を連携することができるアプリです。<br>
+                まずは右上の設定ボタンから初回登録を行ってください。
+            </div>
+            <div align="center">
+                <img id="shake_me_tutorial" border="0" src="img/shake_me.png" width="180px;" height="180px;" alt="Shake Me!" />
             </div>
         </div>
         <div id="shake_page" class="panel" style="display:none">
@@ -46,8 +53,15 @@
             </div>
         </div>
         <div id="setting_page" class="panel" style="display:none">
-            メーラー：<br>
+            メーラー<br>
             <input type="text" id="mailer" name="mailer" alt="mailer" /><br>
+            送信先アドレス<br>
+            <input type="text" id="address" name="address" alt="address" /><br>
+            件名<br>
+            <input type="text" id="subject" name="subject" alt="subject" /><br>
+            本文<br>
+            <textarea id="body" name="body" alt="body"></textarea><br>
+            <img id="register" border="0" src="img/btn_register.png" alt="Shake Me!" />
         </div>
         <script src="js/cordova.js"></script>
         <script src="js/jquery.js"></script>
