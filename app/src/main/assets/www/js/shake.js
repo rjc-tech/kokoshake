@@ -62,20 +62,19 @@ GeolocationUtil.prototype = {
  */
 function ShakeDetectionUtil(geoOptions) {
 	this.geoOptions = geoOptions;
-	this.lastShaked = 0;
 }
 ShakeDetectionUtil.prototype = {
 	isUsable: function(){
 		return window.DeviceMotionEvent ? true : false;
 	},
 	shakeHandling: function(callback){
+		var lastShaked = 0;
 		window.addEventListener("devicemotion", function(event){
 			var x = event.accelerationIncludingGravity.x;
-
 			if (x > 10) {
-				// 連続しないように1秒間ロック
-				if (new Date().getTime() - this.lastShaked > 1000) {
-				    this.lastShaked = new Date().getTime();
+				// 連続しないように3秒間ロック
+				if (new Date().getTime() - lastShaked > 3000) {
+				   lastShaked = new Date().getTime();
 
 				    if (typeof callback == 'function'){
 						callback();
