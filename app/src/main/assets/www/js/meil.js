@@ -52,11 +52,12 @@ document.addEventListener('deviceready', function() {
         alert("addEventListener");
 
         var extras = {};
-        extras[WebIntent.EXTRA_SUBJECT] = "サブジェクト";
-        extras[WebIntent.EXTRA_TEXT] = "テキスト";
+        extras[WebIntent.EXTRA_SUBJECT] = document.getElementById('subject').value;
+        extras[WebIntent.EXTRA_TEXT] = document.getElementById('body').value;
 
-        alert("open_mail start");
+        alert(extras[WebIntent.EXTRA_TEXT]);
 
+        /* メール */
         window.plugins.webintent.startActivity({
             action: WebIntent.ACTION_SEND,
             type: 'text/plain',

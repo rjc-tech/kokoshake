@@ -1,4 +1,4 @@
-import org.apache.cordova.DroidGap;
+package com.borismus.webintent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,8 +64,7 @@ public class Web extends Plugin {
 				if (args.length() != 1) {
 					return new PluginResult(PluginResult.Status.INVALID_ACTION);
 				}
-				Intent i = cordova.getActivity().getIntent();
-				// Intent i = this.ctx.getIntent();
+				Intent i = this.ctx.getIntent();
 				String extraName = args.getString(0);
 				return new PluginResult(PluginResult.Status.OK, i.hasExtra(extraName));
 				
@@ -73,8 +72,7 @@ public class Web extends Plugin {
 				if (args.length() != 1) {
 					return new PluginResult(PluginResult.Status.INVALID_ACTION);
 				}
-				Intent i = cordova.getActivity().getIntent();
-				// Intent i = this.ctx.getIntent();
+				Intent i = this.ctx.getIntent();
 				String extraName = args.getString(0);
 				if (i.hasExtra(extraName)) {
 					return new PluginResult(PluginResult.Status.OK, i.getStringExtra(extraName));
@@ -85,8 +83,7 @@ public class Web extends Plugin {
 				if (args.length() != 0) {
 					return new PluginResult(PluginResult.Status.INVALID_ACTION);
 				}
-				Intent i = cordova.getActivity().getIntent();
-				// Intent i = this.ctx.getIntent();
+				Intent i = this.ctx.getIntent();
 				return new PluginResult(PluginResult.Status.OK, i.getDataString());
 			}
 			return new PluginResult(PluginResult.Status.INVALID_ACTION);
@@ -105,7 +102,6 @@ public class Web extends Plugin {
 			String value = extras.get(key);
 			i.putExtra(key, value);
 		}
-		//this.ctx.startActivity(i);
-		this.cordova.getActivity().startActivity(i);
+		this.ctx.startActivity(i);
 	}
 }

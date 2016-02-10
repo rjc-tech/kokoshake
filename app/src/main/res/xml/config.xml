@@ -103,6 +103,6 @@
     </feature>
     <!-- Deprecated plugins element. Remove in 3.0 -->
     <plugins>
-        <plugin name="WebIntent2" value="com.borismus.webintent.WebIntent2"/>
+        <plugin name="WebIntent" value="com.borismus.webintent.WebIntent"/>
     </plugins>
 </widget>
