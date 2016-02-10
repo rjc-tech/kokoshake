@@ -100,8 +100,13 @@ public class WebIntent extends Plugin {
 		}
 
 		for (String key : extras.keySet()) {
-			String value = extras.get(key);
-			i.putExtra(key, value);
+			if ("android.intent.extra.EMAIL".equals(key)) {
+				String[] values = extras.get(key).split(",");
+				i.putExtra(key, values);
+			} else {
+				String value = extras.get(key);
+				i.putExtra(key, value);
+			}
 		}
 
 		this.cordova.getActivity().startActivity(i);
