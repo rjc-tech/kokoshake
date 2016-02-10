@@ -15,7 +15,9 @@ document.addEventListener('deviceready', function() {
 function onSuccess(contacts) {
     var res = "<ol>";
     for (var i=0; i < contacts.length; i++) {
-        res += '<a href="#setting_page"><li class="mail_info">' + contacts[i].displayName + '：[' + '<span class="mail_address">' + contacts[i].emails[0]["value"] + '</span>]</li></a>';
+        if (contacts[i].emails != null) {
+            res += '<a href="#setting_page"><li class="mail_info">' + contacts[i].displayName + ':[' + '<span class="mail_address">' + contacts[i].emails[0].value + '</span>]</li></a>';
+        }
     }
     $('#address_message').html(res);
     $(".mail_info").on("click", function(){
