@@ -1,16 +1,25 @@
 var msgJp;
+var geoOptions = { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true };
 
 document.addEventListener('deviceready', function() {
+
+    var geolocationUtil = new GeolocationUtil(geoOptions);
+    var shakeDetectionUtil = new ShakeDetectionUtil(geoOptions);
 
     $.getJSON("messages/msg_jp.json").done(function (data){
         msgJp = data;
 
-        // 端末の機能チェック
-        if (!navigator.geolocation) {
+        // GPS機能可否チェック
+        if (!geolocationUtil.isUsable()) {
             alert(msgJp.system.canNotUse);
             navigator.app.exitApp();
         }
-
+        // シェイク判定機能可否チェック
+        if (!shakeDetectionUtil.isUsable()) {
+            alert(msgJp.system.canNotUse);
+            navigator.app.exitApp();
+        }
+        // localstrage機能可否チェック
         if (!window.localStorage) {
             alert(msgJp.system.canNotUse);
             navigator.app.exitApp();
@@ -28,6 +37,16 @@ document.addEventListener('deviceready', function() {
 	    $("#subject").val(window.localStorage.getItem("subject"));
         $("#body").val(window.localStorage.getItem("body"));
     });
+
+    // シェイクイベントのハンドリング
+ 　 if (shakeDetectionUtil.isUsable()) {
+        // TODO 動作確認用のcallback関数
+        // メール送信機能に差し替えてください
+        var callback = function() {
+            alert("シェイクされたよ！！");
+        }
+        shakeDetectionUtil.shakeHandling(callback);
+    }
 
 	// チュートリアルが終わった時の処理
 	$("#tutorial_page").click(function() {
