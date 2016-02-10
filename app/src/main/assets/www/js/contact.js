@@ -20,7 +20,7 @@ function onSuccess(contacts) {
         }
     }
     if (contacts.length == 0) {
-        res = '<a href="#setting_page">メールアドレスが1件もありません。あっ…</a>';
+        res = '<a href="#setting_page">連絡先にメールアドレスが登録されていません</a>';
     }
 
     $('#address_message').html(res);
