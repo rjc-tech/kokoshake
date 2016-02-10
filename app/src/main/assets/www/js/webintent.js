@@ -46,5 +46,5 @@ WebIntent.prototype.getDataString = function(success, fail) {
 
 PhoneGap.addConstructor(function() {
 	PhoneGap.addPlugin('webintent', new WebIntent());
-	PluginManager.addService("WebIntent","com.borismus.webintent.WebIntent");
+	PluginManager.addService("WebIntent","jp.co.rjc.kokoshake.webintent.WebIntent");
 });

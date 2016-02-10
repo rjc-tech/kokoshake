@@ -1,17 +1,16 @@
-package com.borismus.webintent;
-import org.apache.cordova.DroidGap;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+package jp.co.rjc.kokoshake.webintent;
 
 import android.content.Intent;
 import android.net.Uri;
 
-import com.phonegap.api.Plugin;
-import com.phonegap.api.PluginResult;
+import org.apache.cordova.api.Plugin;
+import org.apache.cordova.api.PluginResult;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * WebIntent is a PhoneGap plugin that bridges Android intents and web applications:
@@ -23,7 +22,7 @@ import com.phonegap.api.PluginResult;
  * @author boris@borismus.com
  *
  */
-public class Web extends Plugin {
+public class WebIntent extends Plugin {
 
 	/**
 	 * Executes the request and returns PluginResult.
