@@ -15,8 +15,14 @@ document.addEventListener('deviceready', function() {
 function onSuccess(contacts) {
     var res = "<ol>";
     for (var i=0; i < contacts.length; i++) {
-        res += '<a href="#setting_page"><li class="mail_info">' + contacts[i].displayName + '：[' + '<span class="mail_address">' + contacts[i].emails[0]["value"] + '</span>]</li></a>';
+        if (contacts[i].emails != null) {
+            res += '<a href="#setting_page"><li class="mail_info">' + contacts[i].displayName + ':[' + '<span class="mail_address">' + contacts[i].emails[0].value + '</span>]</li></a>';
+        }
     }
+    if (contacts.length == 0) {
+        res = '<a href="#setting_page">連絡先にメールアドレスが登録されていません</a>';
+    }
+
     $('#address_message').html(res);
     $(".mail_info").on("click", function(){
         $('#address').val($(this).children(".mail_address").text());
@@ -25,5 +31,6 @@ function onSuccess(contacts) {
 
 // アドレス取得失敗
 function onError() {
-    alert('Error');
+    res = '<a href="#setting_page">エラー</a>';
+    $('#address_message').html(res);
 }
