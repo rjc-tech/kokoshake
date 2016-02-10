@@ -6,6 +6,7 @@ WebIntent.ACTION_SEND = "android.intent.action.SEND";
 WebIntent.ACTION_VIEW= "android.intent.action.VIEW";
 WebIntent.EXTRA_TEXT = "android.intent.extra.TEXT";
 WebIntent.EXTRA_SUBJECT = "android.intent.extra.SUBJECT";
+WebIntent.EXTRA_EMAIL = "android.intent.extra.EMAIL";
 
 WebIntent.prototype.startActivity = function(params, success, fail) {
 	return cordova.exec(function(args) {
@@ -48,22 +49,35 @@ cordova.addConstructor(function() {
 
 document.addEventListener('deviceready', function() {
     $("#shake_me").on("click", function() {
-        // test
-        alert("addEventListener");
 
         var extras = {};
-        extras[WebIntent.EXTRA_SUBJECT] = document.getElementById('subject').value;
-        extras[WebIntent.EXTRA_TEXT] = document.getElementById('body').value;
 
-        alert(extras[WebIntent.EXTRA_TEXT]);
 
-        /* メール */
+        //extras[WebIntent.EXTRA_EMAIL] = window.localStorage.getItem("address");
+        extras[WebIntent.EXTRA_EMAIL] = ["aaaa@co.jp"];
+        extras[WebIntent.EXTRA_SUBJECT] = window.localStorage.getItem("subject");
+        extras[WebIntent.EXTRA_TEXT] = window.localStorage.getItem("body");
+
         window.plugins.webintent.startActivity({
             action: WebIntent.ACTION_SEND,
             type: 'text/plain',
             extras: extras
         }, function() {}, function() {alert('Failed to send email via Android Intent');});
 
-        alert("open_mail end");
     });
+    /*
+    var GOOGLE_MAP_URL = "https://www.google.com/maps?q="
+    var geolocationUtil = new GeolocationUtil(geoOptions);
+    if (geolocationUtil.isUsable()) {
+        var callback = function(locationInfo) {
+            var latitude = locationInfo.latitude;
+            var longitude = locationInfo.longitude;
+
+            var mapUrl = GOOGLE_MAP_URL + latitude + ',' + longitude;
+
+            // TODO メール送信処理
+        }
+        geolocationUtil.getLocationInfo(callback);
+    }
+    */
 }, false);

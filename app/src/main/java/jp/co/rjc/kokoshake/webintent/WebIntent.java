@@ -93,14 +93,17 @@ public class WebIntent extends Plugin {
 	}
 	
 	void startActivity(String action, Uri uri, String type, Map<String, String> extras) {
+
 		Intent i = (uri != null ? new Intent(action, uri) : new Intent(action));
 		if (type != null) {
 			i.setType(type);
 		}
+
 		for (String key : extras.keySet()) {
 			String value = extras.get(key);
 			i.putExtra(key, value);
 		}
+
 		this.cordova.getActivity().startActivity(i);
 	}
 }
