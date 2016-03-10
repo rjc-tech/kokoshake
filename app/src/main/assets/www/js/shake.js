@@ -40,6 +40,17 @@ GeolocationUtil.prototype = {
 
 		function error(err) {
 		    console.warn('ERROR(' + err.code + '): ' + err.message);
+		    var err_msg = "";
+		    switch(err.code){
+				case 1:
+				  err_msg = "位置情報の利用が許可されていません";
+				  break;
+				case 2:
+				case 3:
+				  err_msg = "デバイスの位置が判定できませんでした";
+				  break;
+			}
+			alert(err_msg);
 		};
 
 		navigator.geolocation.getCurrentPosition(success, error, this.geoOptions);
