@@ -40,10 +40,10 @@ document.addEventListener('deviceready', function() {
 
     // シェイクイベントのハンドリング
  　 if (shakeDetectionUtil.isUsable()) {
-        // TODO 動作確認用のcallback関数
-        // メール送信機能に差し替えてください
+        // メール送信
         var callback = function() {
-            alert("シェイクされたよ！！");
+            console.log('call SendMail');
+            sendMail();
         }
         shakeDetectionUtil.shakeHandling(callback);
     }
