@@ -1,27 +1,27 @@
 document.addEventListener('deviceready', function() {
     // アドレス情報を表示
     $("#address_setting_link").click(function() {
-        var fstr = "";
         var opt = new ContactFindOptions();
-        opt.filter = fstr;
         // 複数件取得する場合のフラグ
         opt.multiple=true;
-        var flds = ["displayName","emails"];
-        var contact = navigator.contacts.find(flds,onSuccess,onError,opt);
+        var fields = ["displayName","emails"];
+        var contact = navigator.contacts.find(fields,onSuccess,onError,opt);
     });
 }, false);
 
 // アドレス取得成功
 function onSuccess(contacts) {
-    var res = "<ol>";
-    for (var i=0; i < contacts.length; i++) {
-        if (contacts[i].emails != null) {
-            res += '<a href="#setting_page"><li class="mail_info">' + contacts[i].displayName + ':[' + '<span class="mail_address">' + contacts[i].emails[0].value + '</span>]</li></a>';
-        }
-    }
     if (contacts.length == 0) {
         res = '<a href="#setting_page">連絡先にメールアドレスが登録されていません</a>';
+        return;
     }
+
+    var res = "<ol>";
+    contacts.forEach(function(contact){
+        if (contact.emails != null && contact.emails[0] != null) {
+            res += '<a href="#setting_page"><li class="mail_info">' + contact.displayName + ':[' + '<span class="mail_address">' + contact.emails[0].value + '</span>]</li></a>';
+        }
+    });
 
     $('#address_message').html(res);
     $(".mail_info").on("click", function(){
