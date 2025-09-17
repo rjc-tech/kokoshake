@@ -1,4 +1,8 @@
 # kokoshake
 
-## Links
-[Googleドライブ](https://drive.google.com/drive/u/4/folders/0B2lLshINxwmzVUVSc3d3YXdJdUE)
+## Overview
+自身の位置情報を知らせるCordovaを使用したクロスプラットフォームアプリ
+スマホを振る（シェイク）すると、事前に登録した連絡先に現在の位置情報を送信してくれる
+
+## Author
+[株式会社ＲＪＣ](https://www.r-jc.jp/) システム開発部第4グループ
